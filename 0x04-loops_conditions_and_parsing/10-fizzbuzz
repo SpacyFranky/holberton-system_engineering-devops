@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# This script displays numbers from 1 to 100 with the FizzBuzz format
+# shellcheck disable=SC2034
+for i in {1..100}; do
+    if ! ((i%3)) && ! ((i%5)); then
+	echo "FizzBuzz"
+    elif ! ((i%3)); then
+	echo "Fizz"
+    elif ! ((i%5)); then
+	echo "Buzz"
+    else
+	echo "$i"
+    fi
+done
