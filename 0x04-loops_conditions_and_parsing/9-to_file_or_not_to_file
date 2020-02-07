@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # This script gives you information about the "holbertonschool" file
 file=holbertonschool
-if test "$file"; then
+if test -e "$file"; then
     echo "$file file exists"
     if [ -s "$file" ]; then
 	echo "$file file is not empty"
