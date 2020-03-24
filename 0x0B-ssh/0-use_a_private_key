@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
 # Bash script that uses ssh to connect to your server using
 # the private key ~/.ssh/holberton with the user ubuntu.
-eval $(ssh-agent)
-ssh-add
-ssh -A ubuntu@104.196.213.138
+ssh -i ~/.ssh/holberton ubuntu@34.74.170.251
