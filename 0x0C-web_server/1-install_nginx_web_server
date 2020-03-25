@@ -7,6 +7,6 @@
 ssh -i ~/.ssh/holberton ubuntu@34.74.170.251 "sudo apt-get -y update"
 ssh -i ~/.ssh/holberton ubuntu@34.74.170.251 "sudo apt-get -y install nginx"
 ssh -i ~/.ssh/holberton ubuntu@34.74.170.251 "sudo systemctl start nginx"
-FILE="/var/www/html/index.nginx-debian.html"
-ssh -i ~/.ssh/holberton ubuntu@34.74.170.251 "echo 'Holberton School' > $FILE"
+ssh -i ~/.ssh/holberton ubuntu@34.74.170.251 "sudo chown -R ubuntu:ubuntu /var/www"
+ssh -i ~/.ssh/holberton ubuntu@34.74.170.251 "sudo echo 'Holberton School' > /var/www/html/index.nginx-debian.html"
 ssh -i ~/.ssh/holberton ubuntu@34.74.170.251 "sudo systemctl restart nginx"
