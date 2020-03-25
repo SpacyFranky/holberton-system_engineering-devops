@@ -7,5 +7,4 @@
 ssh -i ~/.ssh/holberton ubuntu@34.74.170.251 "sudo apt-get -y update"
 ssh -i ~/.ssh/holberton ubuntu@34.74.170.251 "sudo apt-get -y install nginx"
 FILE="/var/www/html/index.nginx-debian.html"
-ssh -i ~/.ssh/holberton ubuntu@34.74.170.251 "rm $FILE && touch $FILE"
-ssh -i ~/.ssh/holberton ubuntu@34.74.170.251 "echo "Holberton School" >> $FILE"
+ssh -i ~/.ssh/holberton ubuntu@34.74.170.251 "echo "Holberton School" > $FILE"
