@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Install nginx on my web-01 server
+# Nginx should be listening on port 80
+# When querying Nginx at its root / with a GET request (requesting a page)
+# using curl, it must return a page that contains the string Holberton School
+# Bash script that configures a new Ubuntu machine to respect above requirements
+ssh -i ~/.ssh/holberton ubuntu@34.74.170.251 "sudo apt-get -y update"
+ssh -i ~/.ssh/holberton ubuntu@34.74.170.251 "sudo apt-get -y install nginx"
+FILE="/var/www/html/index.nginx-debian.html"
+rm $FILE
+touch $FILE
+echo "Holberton School" >> $FILE
