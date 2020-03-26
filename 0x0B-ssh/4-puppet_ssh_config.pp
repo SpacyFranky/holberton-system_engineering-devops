@@ -1,7 +1,7 @@
 # Client configuration file (w/ Puppet)
-server_options => {
-  'Match User www-data' => {
-    'PasswordAuthentication' => 'no',
-    'IdentityFile' => '~/.ssh/holberton',
-  }
+exec { 'echo "PasswordAuthentication no" >> /etc/ssh/ssh_config':
+  provider => shell,
+}
+exec { 'echo "IdentityFile ~/.ssh/holberton" >> /etc/ssh/ssh_config':
+  provider => shell,
 }
