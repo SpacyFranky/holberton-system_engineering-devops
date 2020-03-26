@@ -5,5 +5,5 @@ sudo apt-get -y update
 sudo apt-get -y install nginx
 sudo systemctl start nginx
 FILE="/etc/nginx/sites-available/default"
-sudo sed -i '42i rewrite ^/redirect_me/$ https://youtu.be/QH2-TGUlwu4 permanent;' $FILE
+sudo sed -i '42i rewrite ^/redirect_me/$ https://youtu.be/QH2-TGUlwu4 permanent;\n' $FILE
 sudo systemctl restart nginx
