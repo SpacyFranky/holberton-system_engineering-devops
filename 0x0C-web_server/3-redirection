@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 # Configuring my Nginx server so that /redirect_me is redirecting
 # to another page
-ssh -i ~/.ssh/holberton ubuntu@34.74.170.251 "sudo apt-get -y update"
-ssh -i ~/.ssh/holberton ubuntu@34.74.170.251 "sudo apt-get -y install nginx"
-ssh -i ~/.ssh/holberton ubuntu@34.74.170.251 "sudo systemctl start nginx"
-ssh -i ~/.ssh/holberton ubuntu@34.74.170.251 "sudo sed -i '42i rewrite ^/redirect_me/$ https://youtu.be/QH2-TGUlwu4 permanent;' /etc/nginx/sites-available/default"
-ssh -i ~/.ssh/holberton ubuntu@34.74.170.251 "sudo systemctl restart nginx"
+sudo apt-get -y update
+sudo apt-get -y install nginx
+sudo systemctl start nginx
+FILE="/etc/nginx/sites-available/default"
+sudo sed -i '42i rewrite ^/redirect_me/$ https://youtu.be/QH2-TGUlwu4 permanent;' $FILE
+sudo systemctl restart nginx
