@@ -6,7 +6,6 @@
 # Bash script that configures a new Ubuntu machine to respect above requirements
 sudo apt-get -y update
 sudo apt-get -y install nginx
-sudo systemctl start nginx
 sudo chown -R ubuntu:ubuntu /var/www
-sudo echo 'Holberton School' > /var/www/html/index.nginx-debian.html
+sudo echo "Holberton School" > /var/www/html/index.nginx-debian.html
 sudo systemctl restart nginx
