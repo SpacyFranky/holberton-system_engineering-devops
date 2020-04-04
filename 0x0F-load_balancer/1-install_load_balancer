@@ -6,8 +6,8 @@ sudo apt-get install software-properties-common
 sudo add-apt-repository ppa:vbernat/haproxy-1.8
 sudo apt-get -y update
 sudo apt-get install haproxy=1.8.\*
-SERVER1="frontend 1065-lb-01\\\n\tbind *:80\\\n\tdefault_backend nginx_pool\n"
-SERVER2="backend nginx_pool\\\n\tbalance roundrobin\\\n\tmode http\\\n\tserver 1065-web-01 3.92.144.7:80 check\\\n\tserver 1065-web-02 18.234.132.216:80 check\n"
+SERVER1="frontend 1065-lb-01\nbind *:80\ndefault_backend nginx_pool\n"
+SERVER2="backend nginx_pool\nbalance roundrobin\nmode http\nserver 1065-web-01 3.92.144.7:80 check\nserver 1065-web-02 18.234.132.216:80 check\n"
 sudo echo $SERVER1 >> /etc/haproxy/haproxy.cfg
 sudo echo $SERVER2 >> /etc/haproxy/haproxy.cfg
 sudo service haproxy restart
