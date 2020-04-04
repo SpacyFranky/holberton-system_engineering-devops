@@ -2,12 +2,12 @@
 # This bash script installs and configures HAproxy on your lb-01 server
 # so that is sends traffic to web-01 and web-02.
 sudo apt-get -y update
-sudo apt-get install software-properties-common
-sudo add-apt-repository ppa:vbernat/haproxy-1.8
+sudo apt-get install -y software-properties-common
+sudo add-apt-repository -y ppa:vbernat/haproxy-1.8
 sudo apt-get -y update
-sudo apt-get install haproxy=1.8.\*
-SERVER1="frontend 1065-lb-01\nbind *:80\ndefault_backend nginx_pool\n"
-SERVER2="backend nginx_pool\nbalance roundrobin\nmode http\nserver 1065-web-01 3.92.144.7:80 check\nserver 1065-web-02 18.234.132.216:80 check\n"
-sudo echo $SERVER1 >> /etc/haproxy/haproxy.cfg
-sudo echo $SERVER2 >> /etc/haproxy/haproxy.cfg
+sudo apt-get install -y haproxy=1.8.\*
+FRONTEND="frontend 1065-lb-01\nbind *:80\ndefault_backend nginx_pool\n"
+BACKEND="backend nginx_pool\nbalance roundrobin\nmode http\nserver 1065-web-01 3.92.144.7:80 check\nserver 1065-web-02 18.234.132.216:80 check\n"
+sudo echo $SERVER1 | sudo tee /etc/haproxy/haproxy.cfg
+sudo echo $SERVER2 | sudo tee /etc/haproxy/haproxy.cfg
 sudo service haproxy restart
