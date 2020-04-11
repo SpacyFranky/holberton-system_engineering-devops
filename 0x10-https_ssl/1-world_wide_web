@@ -3,27 +3,31 @@
 # Output: The subdomain [SUB_DOMAIN] is a [RECORD_TYPE] record and points to [DESTINATION]
 
 func () {
-    if [ $# -lt 2 ]; then
-	type0=$(dig www.spacefree.tech | grep -A1 'ANSWER SECTION:' | awk 'FNR==2{print $4}')
+    if [ $# -eq 1 ]; then
+	type0=$(dig www."$1" | grep -A1 'ANSWER SECTION:' | awk 'FNR==2{print $4}')
+	dest0=$(dig www."$1" | grep -A1 'ANSWER SECTION:' | awk 'FNR==2{print $5}')
 	sub0="www"
-	dest0=$(dig www.spacefree.tech | grep -A1 'ANSWER SECTION:' | awk 'FNR==2{print $5}')
 	echo "The subdomain $sub0 is a $type0 record and points to $dest0"
-	type1=$(dig lb-01.spacefree.tech | grep -A1 'ANSWER SECTION:' | awk 'FNR==2{print $4}')
+
+	type1=$(dig lb-01."$1" | grep -A1 'ANSWER SECTION:' | awk 'FNR==2{print $4}')
+	dest1=$(dig lb-01."$1" | grep -A1 'ANSWER SECTION:' | awk 'FNR==2{print $5}')
 	sub1="lb-01"
-	dest1=$(dig lb-01.spacefree.tech | grep -A1 'ANSWER SECTION:' | awk 'FNR==2{print $5}')
 	echo "The subdomain $sub1 is a $type1 record and points to $dest1"
-	type2=$(dig web-01.spacefree.tech | grep -A1 'ANSWER SECTION:' | awk 'FNR==2{print $4}')
+
+	type2=$(dig web-01."$1" | grep -A1 'ANSWER SECTION:' | awk 'FNR==2{print $4}')
+	dest2=$(dig web-01."$1" | grep -A1 'ANSWER SECTION:' | awk 'FNR==2{print $5}')
 	sub2="web-01"
-	dest2=$(dig web-01.spacefree.tech | grep -A1 'ANSWER SECTION:' | awk 'FNR==2{print $5}')
 	echo "The subdomain $sub2 is a $type2 record and points to $dest2"
-	type3=$(dig web-02.spacefree.tech | grep -A1 'ANSWER SECTION:' | awk 'FNR==2{print $4}')
+
+	type3=$(dig web-02."$1" | grep -A1 'ANSWER SECTION:' | awk 'FNR==2{print $4}')
+	dest3=$(dig web-02."$1" | grep -A1 'ANSWER SECTION:' | awk 'FNR==2{print $5}')
 	sub3="web-02"
-	dest3=$(dig web-02.spacefree.tech | grep -A1 'ANSWER SECTION:' | awk 'FNR==2{print $5}')
 	echo "The subdomain $sub3 is a $type3 record and points to $dest3"
-    else
-	type=$(dig "$2".spacefree.tech | grep -A1 'ANSWER SECTION:' | awk 'FNR==2{print $4}')
-	sub="$2"
-	dest=$(dig "$2".spacefree.tech | grep -A1 'ANSWER SECTION:' | awk 'FNR==2{print $5}')
+
+    elif [ $# -eq 2 ]; then
+	type=$(dig "$2"."$1" | grep -A1 'ANSWER SECTION:' | awk 'FNR==2{print $4}')
+	dest=$(dig "$2"."$1" | grep -A1 'ANSWER SECTION:' | awk 'FNR==2{print $5}')
+	sub=$2
 	echo "The subdomain $sub is a $type record and points to $dest"
     fi
     return 0
