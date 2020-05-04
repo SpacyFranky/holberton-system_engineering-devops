@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-""" A Python script that, using a fake REST API, for a given employee ID,
-    returns information about his/her TODO list progress
-"""
+""" A Python script that exports data in the CSV format """
 
 import csv
 import requests
