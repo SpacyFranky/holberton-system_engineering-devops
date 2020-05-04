@@ -4,6 +4,7 @@
 import json
 import requests
 import sys
+from collections import OrderedDict
 
 if __name__ == '__main__':
 
@@ -21,7 +22,7 @@ if __name__ == '__main__':
         l = r_todo.json()
         data = {sys.argv[1]: []}
         for d in l:
-            add = {}
+            add = OrderedDict()
             add['task'] = d.get("title")
             add['completed'] = d.get("completed")
             add['username'] = username
