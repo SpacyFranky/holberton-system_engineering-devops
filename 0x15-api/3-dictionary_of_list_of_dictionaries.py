@@ -4,6 +4,7 @@
 import json
 import requests
 import sys
+from collections import OrderedDict
 
 if __name__ == '__main__':
 
@@ -11,7 +12,7 @@ if __name__ == '__main__':
     u_users = requests.get(url_users)
     users = u_users.json()
 
-    data = {}
+    data = OrderedDict()
 
     for i in range(1, len(users) + 1):
 
@@ -29,10 +30,10 @@ if __name__ == '__main__':
         data[str(i)] = []
 
         for d in l:
-            add = {}
+            add = OrderedDict()
+            add['username'] = username
             add['task'] = d.get("title")
             add['completed'] = d.get("completed")
-            add['username'] = username
             data[str(i)].append(add)
 
     with open('todo_all_employees.json', 'w', newline='') as file:
