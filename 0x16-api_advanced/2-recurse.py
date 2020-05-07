@@ -34,13 +34,15 @@ import requests
 # Recursive Method
 
 def recurse(subreddit, hot_list=[]):
+    """main recursive function that handles initial page
+    """
     url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
     r = requests.get(url, headers={'User-Agent': 'hello-student 0.4'},
                      params={'limit': 100})
     d = r.json()
     try:
         for i in d['data']['children']:
-            if i['data']['title'] == [] or i['data']['title'] is None:
+            if i['data']['title'] is None:
                 return hot_list
             hot_list.append(i['data']['title'])
         name = d['data']['after']
@@ -48,22 +50,20 @@ def recurse(subreddit, hot_list=[]):
             return
     except KeyError:
         return None
-    recurse_helper(subreddit, hot_list, name)
+    recursive(subreddit, hot_list, name)
     return hot_list
 
 
-def recurse_helper(subreddit, hot_list=[], name=""):
+def recursive(subreddit, hot_list=[], name=""):
+    """handles the other entries"""
     url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
     r = requests.get(url, headers={'User-Agent': 'hello-student 0.4'},
                      params={'after': name, 'limit': 100})
     d = r.json()
-    try:
-        for i in d['data']['children']:
-            if i['data']['title'] == [] or i['data']['title'] is None:
-                return hot_list
-            hot_list.append(i['data']['title'])
-        if d['data']['after'] is None:
-            return
-    except KeyError:
-        return None
+    for i in d['data']['children']:
+        if i['data']['title'] is None:
+            return hot_list
+        hot_list.append(i['data']['title'])
+    if d['data']['after'] is None:
+        return
     return recurse_helper(subreddit, hot_list, d['data']['after'])
