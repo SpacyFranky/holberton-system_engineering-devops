@@ -66,4 +66,4 @@ def recursive(subreddit, hot_list=[], name=""):
         hot_list.append(i['data']['title'])
     if d['data']['after'] is None:
         return
-    return recurse_helper(subreddit, hot_list, d['data']['after'])
+    return recursive(subreddit, hot_list, d['data']['after'])
