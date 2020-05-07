@@ -36,11 +36,11 @@ import requests
 def recurse(subreddit, hot_list=[]):
     """main recursive function that handles initial page
     """
-    url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
-    r = requests.get(url, headers={'User-Agent': 'hello-student 0.4'},
-                     params={'limit': 100})
-    d = r.json()
     try:
+        url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
+        r = requests.get(url, headers={'User-Agent': 'hello-student 0.4'},
+                         params={'limit': 100})
+        d = r.json()
         hot_list.extend(d['data']['children'])
         page = d['data']['after']
         if d['data']['after'] is None:
