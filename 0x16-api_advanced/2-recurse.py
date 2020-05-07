@@ -41,29 +41,23 @@ def recurse(subreddit, hot_list=[]):
                      params={'limit': 100})
     d = r.json()
     try:
-        for i in d['data']['children']:
-            if i['data']['title'] is None:
-                return hot_list
-            hot_list.append(i['data']['title'])
-        name = d['data']['after']
+        hot_list.extend(d['data']['children'])
+        page = d['data']['after']
         if d['data']['after'] is None:
             return
     except KeyError:
         return None
-    recursive(subreddit, hot_list, name)
+    recursive(subreddit, hot_list, page)
     return hot_list
 
 
-def recursive(subreddit, hot_list=[], name=""):
+def recursive(subreddit, hot_list=[], page=""):
     """handles the other entries"""
+    if page is None:
+        return
     url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
     r = requests.get(url, headers={'User-Agent': 'hello-student 0.4'},
-                     params={'after': name, 'limit': 100})
+                     params={'after': page, 'limit': 100})
     d = r.json()
-    for i in d['data']['children']:
-        if i['data']['title'] is None:
-            return hot_list
-        hot_list.append(i['data']['title'])
-    if d['data']['after'] is None:
-        return
+    hot_list.extend(d['data']['children'])
     return recursive(subreddit, hot_list, d['data']['after'])
