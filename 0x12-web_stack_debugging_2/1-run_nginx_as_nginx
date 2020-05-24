@@ -5,6 +5,5 @@
 # I cannot use apt-get remove
 pkill apache2
 sudo chmod u+w /etc/nginx/nginx.conf
-sudo sed -i '1 s/^.*$/user nginx;/'
 sudo sed -i "s/80/8080/" /etc/nginx/sites-enabled/default
-sudo service nginx start
+sudo su nginx -c "sudo service nginx start"
