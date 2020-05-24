@@ -5,3 +5,4 @@
 # I cannot use apt-get remove
 sudo chmod u+w /etc/nginx/nginx.conf
 sudo sed -i '1 s/^.*$/user nginx;/'
+sudo service nginx start
