@@ -4,6 +4,6 @@
 # nginx must be listening on all active IPs on port 8080
 # I cannot use apt-get remove
 pkill apache2
-sudo chmod u+w /etc/nginx/nginx.conf
 sudo sed -i "s/80/8080/" /etc/nginx/sites-enabled/default
-sudo su nginx -c "sudo service nginx start"
+chmod 777 /etc/nginx/nginx.conf
+sudo su nginx -c "service nginx start"
